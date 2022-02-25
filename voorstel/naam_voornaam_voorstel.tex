@@ -18,6 +18,9 @@
 \documentclass{voorstel}
 
 \usepackage{lipsum}
+\usepackage{import}
+
+\import{../}{_variables.tex}
 
 %------------------------------------------------------------------------------
 % Metadata over het voorstel
@@ -26,12 +29,12 @@
 %---------- Titel & auteur ----------------------------------------------------
 
 % TODO: geef werktitel van je eigen voorstel op
-\PaperTitle{Vergelijking Tussen Keuzes en Combinaties van TypeScript Transpilers en JavaScript Bundlers Bij het Ontwikkelen van React Applicaties}
+\PaperTitle{\bptitle}
 \PaperType{Onderzoeksvoorstel Bachelorproef 2021-2022} % Type document
 
 % TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
-\Authors{Nicolas Van Damme\textsuperscript{1}} % Authors
-\CoPromotor{Arvid De Meyer\textsuperscript{2} (Codifly)}
+\Authors{\bpauthor\textsuperscript{1}} % Authors
+\CoPromotor{\bpcopromotor\textsuperscript{2} (Codifly)}
 \affiliation{\textbf{Contact:}
   \textsuperscript{1} \href{mailto:nicolas.vandamme@student.hogent.be}{nicolas.vandamme@student.hogent.be};
   \textsuperscript{2} \href{mailto:arvid.de.meyer@codifly.be}{arvid.de.meyer@codifly.be};
