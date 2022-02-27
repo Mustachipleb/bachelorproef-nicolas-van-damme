@@ -14,6 +14,6 @@
 
 - [x] Webpack
 - [X] ESBuild
-- [X] Vite
+- [X] Vite (needs a 2nd run)
 - [ ] Parcel
 - [ ] Rollup

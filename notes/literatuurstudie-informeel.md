@@ -5,7 +5,7 @@ Bundlers zijn op hoog niveau tools die je javascript-bestanden zoals de naam imp
 
 ## Webpack
 
-Webpack is een beetje de benchmark in dit onderzoek. Het is de meest mature en gebruikte bundler in de lijst met ongeveer 3x zoveel downloads dan de next most popular keuze, Rollup (+-20mil vs. +-6.5mil).
+Webpack is een beetje de benchmark in dit onderzoek. Het is de meest mature en gebruikte bundler in de lijst met ongeveer 3x zoveel downloads dan de next most popular keuze, Rollup (+-20mil vs. +-6.5mil). Webpack heeft enige configuratie nodig om te werken (niet meer in versie 5).
 
 **De core concepten van webpack zijn als volgt ([source](https://webpack.js.org/concepts/)):**
 
@@ -125,6 +125,44 @@ Production builds gebeuren adhv een vooraf-geconfigureerde en -geoptimaliseerde 
 - Tree-shaking
 - code-splitting dynamic imports
 - en meer...
+
+## [Parcel](https://levelup.gitconnected.com/parcel-vs-webpack-2021-64c347bcb31)
+
+Parcel is ook advertised als een no-configuration bundler.
+
+### Features en notes
+
+- Code-splitting en dynamic imports...
+  - *maar* het bundelt alles samen een vlakke structuur. Webpack maakt folders aan voor images, CSS, JS etc.
+- Parcel is trager dan Webpack op first run, maar is sneller bij subsequente builds (vooral bij het watchen).
+- Hot Module Replacement
+- Gebruikt SWC voor transpilatie
+- Tree shaking
+- Minification
+- Image optimization
+- Compression
+- Content hashing
+- Support Babel en PostCSS
+- Plugin support
+
+|                                | Webpack | ESBuild | Vite | Parcel | Rollup |
+|:------------------------------:|---------|---------|------|--------|--------|
+| Code-splitting                 | <center>:heavy_check_mark:</center> | <center>WIP</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |        |
+| Zero-configuration             | <center>:heavy_check_mark:<br />(vanaf v5)</center> | <center>:x:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |        |
+| Plugin support                 | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:<br />(compatibel met Rollup plugins)</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |
+| Relatieve performantie         | <center>Baseline</center> | <center>Sneller</center> | <center>Sneller</center> | <center>Trager op initiële build, sneller op subsequente builds.</center> |        |
+| Customisability                | <center>Hoog</center> | <center>Hoog</center> | <center>Laag</center> | <center>Laag</center> |        |
+| Dynamic expressionx in import()| <center>:heavy_check_mark:<br />(base directory moet gekend zijn)</center> | <center>:x:<br />(workaround bestaat)</center> | <center>:heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin)</center> | <center>:x:<br />(wel wildcard imports)</center> | <center>:heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin)</center> |
+| Laagste ECMA target            | <center>ES5</center> | <center>ES6</center> | <center>ES5</center> | <center>ES5</center> | <center>ES5</center> |
+| Support voor TS transpilers in deze paper | <center>Alle</center> | <center>Eigen transpiler</center> | <center>Alle adhv Rollup plugins, standaard ESBuild</center> | <center>TSC, Babel, SWC (default)</center> | <center>Alle adhv Rollup plugins, standaard ESBuild</center> |
+| TypeScript typechecking        | <center>:heavy_check_mark:<br />(plugin)</center> | <center>:x:</center> | <center>:heavy_check_mark:<br />(Rollup plugin)</center> | <center>:x:<br />(experimentele plugin)</center> | <center>:heavy_check_mark:<br />(plugin)</center> |
+| HMR (Hot module replacement)   | <center>:heavy_check_mark:</center> | <center>:x:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:<br />(plugin)</center> |
+| Tree shaking                   | <center>:heavy_check_mark:<br />(customisable)</center> | <center>:heavy_check_mark:</center> |      |        |        |
+| Relatieve bundle sizes         |         |         |      |        |        |
+| Serverside rendering support   |         |         |      |        |        |
+| CSS features                   |         |         |      |        |        |
+| Features voor andere datatypes |         |         |      |        |        |
+| Compression                    |         |         |      |        |        |
 
 https://stackoverflow.com/a/32172835/10780174
 https://www.linkedin.com/pulse/why-do-only-3-top-1000-websites-use-http2-server-push-samir-jafferali/
