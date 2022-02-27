@@ -147,17 +147,17 @@ Parcel is ook advertised als een no-configuration bundler.
 
 |                                | Webpack | ESBuild | Vite | Parcel | Rollup |
 |:------------------------------:|---------|---------|------|--------|--------|
-| Code-splitting                 | <center>:heavy_check_mark:</center> | <center>WIP</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |        |
-| Zero-configuration             | <center>:heavy_check_mark:<br />(vanaf v5)</center> | <center>:x:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |        |
-| Plugin support                 | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:<br />(compatibel met Rollup plugins)</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> |
-| Relatieve performantie         | <center>Baseline</center> | <center>Sneller</center> | <center>Sneller</center> | <center>Trager op initiële build, sneller op subsequente builds.</center> |        |
-| Customisability                | <center>Hoog</center> | <center>Hoog</center> | <center>Laag</center> | <center>Laag</center> |        |
-| Dynamic expressionx in import()| <center>:heavy_check_mark:<br />(base directory moet gekend zijn)</center> | <center>:x:<br />(workaround bestaat)</center> | <center>:heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin)</center> | <center>:x:<br />(wel wildcard imports)</center> | <center>:heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin)</center> |
-| Laagste ECMA target            | <center>ES5</center> | <center>ES6</center> | <center>ES5</center> | <center>ES5</center> | <center>ES5</center> |
-| Support voor TS transpilers in deze paper | <center>Alle</center> | <center>Eigen transpiler</center> | <center>Alle adhv Rollup plugins, standaard ESBuild</center> | <center>TSC, Babel, SWC (default)</center> | <center>Alle adhv Rollup plugins, standaard ESBuild</center> |
-| TypeScript typechecking        | <center>:heavy_check_mark:<br />(plugin)</center> | <center>:x:</center> | <center>:heavy_check_mark:<br />(Rollup plugin)</center> | <center>:x:<br />(experimentele plugin)</center> | <center>:heavy_check_mark:<br />(plugin)</center> |
-| HMR (Hot module replacement)   | <center>:heavy_check_mark:</center> | <center>:x:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:</center> | <center>:heavy_check_mark:<br />(plugin)</center> |
-| Tree shaking                   | <center>:heavy_check_mark:<br />(customisable)</center> | <center>:heavy_check_mark:</center> |      |        |        |
+| Code-splitting                 | :heavy_check_mark: | WIP | :heavy_check_mark: | :heavy_check_mark: |        |
+| Zero-configuration             | :heavy_check_mark:<br />(vanaf v5) | :x: | :heavy_check_mark: | :heavy_check_mark: |        |
+| Plugin support                 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:<br />(compatibel met Rollup plugins) | :heavy_check_mark: | :heavy_check_mark: |
+| Relatieve performantie         | Baseline | Sneller | Sneller | Trager op initiële build, sneller op subsequente builds. |        |
+| Customisability                | Hoog | Hoog | Laag | Laag |        |
+| Dynamic expressionx in import()| :heavy_check_mark:<br />(base directory moet gekend zijn) | :x:<br />(workaround bestaat) | :heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin) | :x:<br />(wel wildcard imports) | :heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin) |
+| Laagste ECMA target            | ES5 | ES6 | ES5 | ES5 | ES5 |
+| Support voor TS transpilers in deze paper | Alle | Eigen transpiler | Alle adhv Rollup plugins, standaard ESBuild | TSC, Babel, SWC (default) | Alle adhv Rollup plugins, standaard ESBuild |
+| TypeScript typechecking        | :heavy_check_mark:<br />(plugin) | :x: | :heavy_check_mark:<br />(Rollup plugin) | :x:<br />(experimentele plugin) | :heavy_check_mark:<br />(plugin) |
+| HMR (Hot module replacement)   | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:<br />(plugin) |
+| Tree shaking                   | :heavy_check_mark:<br />(customisable) | :heavy_check_mark: |      |        |        |
 | Relatieve bundle sizes         |         |         |      |        |        |
 | Serverside rendering support   |         |         |      |        |        |
 | CSS features                   |         |         |      |        |        |
