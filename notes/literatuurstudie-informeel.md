@@ -150,19 +150,17 @@ Parcel is ook advertised als een no-configuration bundler.
 | Code-splitting                 | :heavy_check_mark: | WIP | :heavy_check_mark: | :heavy_check_mark: |        |
 | Zero-configuration             | :heavy_check_mark:<br />(vanaf v5) | :x: | :heavy_check_mark: | :heavy_check_mark: |        |
 | Plugin support                 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:<br />(compatibel met Rollup plugins) | :heavy_check_mark: | :heavy_check_mark: |
-| Relatieve performantie         | Baseline | Sneller | Sneller | Trager op initiële build, sneller op subsequente builds. |        |
-| Customisability                | Hoog | Hoog | Laag | Laag |        |
+| Relatieve performantie (estimate) | Baseline | Tot 100x sneller | Gebruikt ESBuild | Trager op initiële build, tot 30% sneller op subsequente builds. | Tot 20% sneller |
+| Customisability                | Hoog | Hoog | Laag | Laag | Hoog |
 | Dynamic expressionx in import()| :heavy_check_mark:<br />(base directory moet gekend zijn) | :x:<br />(workaround bestaat) | :heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin) | :x:<br />(wel wildcard imports) | :heavy_check_mark:<br />(met de [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) plugin) |
 | Laagste ECMA target            | ES5 | ES6 | ES5 | ES5 | ES5 |
 | Support voor TS transpilers in deze paper | Alle | Eigen transpiler | Alle adhv Rollup plugins, standaard ESBuild | TSC, Babel, SWC (default) | Alle adhv Rollup plugins, standaard ESBuild |
 | TypeScript typechecking        | :heavy_check_mark:<br />(plugin) | :x: | :heavy_check_mark:<br />(Rollup plugin) | :x:<br />(experimentele plugin) | :heavy_check_mark:<br />(plugin) |
 | HMR (Hot module replacement)   | :heavy_check_mark: | :x: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:<br />(plugin) |
-| Tree shaking                   | :heavy_check_mark:<br />(customisable) | :heavy_check_mark: |      |        |        |
-| Relatieve bundle sizes         |         |         |      |        |        |
-| Serverside rendering support   |         |         |      |        |        |
-| CSS features                   |         |         |      |        |        |
-| Features voor andere datatypes |         |         |      |        |        |
-| Compression                    |         |         |      |        |        |
+| Tree shaking                   | :heavy_check_mark:<br />(customisable) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Serverside rendering support   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| CSS features                   | Alles (met plugins) | Alles behalve code-splitting (met plugins) | Alles (ingebouwd) | Alles behalve code-splitting | Alles (met plugins) |
+| Compression dev server | gzip, brotli | Unofficial plugin | brotli (gzip met unofficial plugin) | gzip, brotli | gzip, brotli |
 
 https://stackoverflow.com/a/32172835/10780174
 https://www.linkedin.com/pulse/why-do-only-3-top-1000-websites-use-http2-server-push-samir-jafferali/
