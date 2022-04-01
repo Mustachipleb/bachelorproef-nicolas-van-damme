@@ -7,11 +7,142 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+% Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
 
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
-Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
+% Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
+% Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
 
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+% \textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
 
-\lipsum[7-20]
+% \lipsum[7-20]
+
+Om van slag te gaan met de bundlers en transpilers, is het handig om ook eerst even stil te staan bij de installatie, en hoe die verloopt.
+
+\todo[inline]{TODO: Deze inleiding beter maken, doorvloeien eenmaal de inleiding af is}
+
+\section{npm en Yarn}
+
+Wanneer er aan een Node project gewerkt wordt, zal er waarschijnlijk gebruik gemaakt worden van npm. npm staat voor Node Package Manager, en zoals de naam impliceert is npm een tool om JavaScript-libraries binnen je project te beheren. Alle projecten die hieronder besproken zullen worden zijn dan ook beschikbaar op \href{https://www.npmjs.com/}{de npm-website}.
+
+\subsection{Initialisatie}
+
+Een nieuw npm-project kan geïnitialiseerd worden aan de hand van het ``\lstinline{npm init}'' commando. Wanneer hier geen verdere argumenten aan gegeven worden zal dit een alleen een package.json bestand aanmaken. De package.json kan de volgende elementen bevatten: \autocite{npmDocsPackageJson}
+
+\begin{itemize}
+    \item Algemene informatie over het project (versie, auteur, naam \ldots). Dit is vooral relevant als het project bedoeld is om zelf op npm beschikbaar te worden.
+    \item Een verzameling van commando's die uitvoerbaar zijn aan de hand van ``\lstinline{npm run [naam van commando]}''
+    \item De verzameling van packages waarvan dit project afhankelijk is.
+    \item De versie van node die dit project gebruikt.
+    \item Nog een aantal andere parameters die niet relevant zijn voor dit onderzoek (OS, CPU \ldots).
+\end{itemize}
+
+Verder kan ook een initializer meegegeven worden aan het init-commando. Een initializer is een npm project dat als prefix ``create-'' heeft, en bevat alle scaffolding die nodig is voor dat bepaald soort project. \lstinline{create-react-app} zal bijvoorbeeld al de startbestanden voor een React app bevatten, en de nodige dependencies om direct aan de slag te kunnen gaan.
+
+\subsection{Dependencies}
+
+Zoals hiervoor vernoemd, bevat de package.json een verzameling van packages waarvan het project afhankelijk is. Deze worden de ``dependencies'' genoemd. Er zijn 5 verschillende soorten dependencies, waarvan de volgende 3 relevant zijn om uit te leggen:
+
+\subsubsection{Normale Dependencies}
+
+Dit is de standaardmanier waarop dependencies toegevoegd worden door npm. Een normale dependency wordt toegevoegd aan de hand van het ``\lstinline{npm i [package]}'' commando. Deze dependencies worden ook meegeleverd in het eindproduct voor de consument. Dit zijn dus functionele benodigdheden bij de uitvoering van het project in een productie-omgeving.
+
+\subsubsection{Development Dependencies}
+
+Het wordt aangeraden om packages die niet nodig zijn om het project uit te voeren binnen een productie-omgeving te installeren als ``devdependency''. Dit wordt gedaan aan de hand van het ``\lstinline{npm i -D [package]}'' commando. Dependencies die als devdependency toegevoegd worden zullen dus niet meegeleverd worden bij het eindproduct, wat de totale grootte van het project kleiner houdt. Bundlers en transpilers vallen onder deze categorie, aangezien het transpileer- en bundelproces deel zijn van wat er moet gebeuren \emph{voor} dat het eindproduct in de productieomgeving wordt geplaatst.
+
+\subsubsection{Peer Dependencies}
+
+Alle packages op npm zijn zelf ook npm-projecten. Dit betekent dus dat zij ook allemaal een package.json hebben, en afhankelijk zijn van bepaalde packages. Een peer dependency is een dependency die niet door de ontwikkelaar zelf wordt toegevoegd, maar door een andere package die de ontwikkelaar toegevoegd heeft.
+
+Het is dus makkelijk om zich voor te stellen dat dit na een tijd leidt naar heel veel dependencies. Gelukkig doet npm aan ``dependency resolution'', waar zoveel mogelijk duplicate dependencies en conflicten opgelost worden.
+
+\subsection{Yarn}
+
+npm is niet de enige package manager. Één van de andere opties is Yarn. Yarn werkt op veel vlakken op een gelijkaardige manier. Beiden tools bestaan voor dezelfde doeleinden, en gebruiken de npm repository om hun packages op te halen. Waar Yarn wél licht in verschilt is hoe het omgaat met het installeren van packages, en het dependency resolution proces. Yarn installeert alle packages in parallel, wat resulteert in veel een sneller installatieproces vergeleken met de synchrone installatie van npm. Op het vlak van dependency resolution is Yarn iets consistenter. Yarn kijkt naar de versie-definitie, terwijl npm kijkt naar de de eigenlijke versie. \autocite{Kay2021} \todo[inline]{TODO: Wat meer info geven over de versie-definities.}
+
+Binnen Codifly wordt altijd Yarn gebruikt, en alle experimenten zullen ter gevolge ook via Yarn uitgevoerd worden. Als een Yarn-commando gebruikt wordt zal de npm-equivalent ook toegelicht worden.
+
+\section{Bundlers}
+
+Bundlers hebben als doel je modulaire JavaScript-code samen te bundelen in 1 bestand voor consumptie op het web. In het verleden konden browsers niet verschillende modules inladen, en hoewel dat nu wel vaak het geval is, heeft het nog steeds zijn voordelen. HTTP/2 biedt browsers de mogelijkheid aan om veel meer dan de hiervoor traditionele 6 verbindingen met een server te openen. Dit is goed als er veel verschillende modules ingeladen moeten worden, maar het lost niet alles op. De browser moet nog steeds 1 per 1 de boom van dependencies afgaan, en pas wanneer er een nieuwe dependency gevonden wordt, wordt die opgevraagd. Ook compressie is minder efficiënt in vele kleinere chunks dan één grote bundel. \autocite{you_2021} Verder is er ook het probleem dat veel externe packages, hoewel ze in ESM syntax geschreven worden, gepubliceerd worden in CJS formaat. CJS formaat is echter niet leesbaar door browsers zonder hulp van een library zoals RequireJS. \autocite{sweeney_2020}
+
+Een bundler bereikt dit door via het ingangspunt van je JavaScript alles te scannen, wanneer de bundler een nieuwe import tegenkomt zal die ook daardoor gaan. Dit proces noemt het bouwen van de dependency graph. Op basis daarvan zal de bundler weten wat er allemaal toegevoegd zal moeten worden aan de bundel.
+
+Er zijn veel opties voor het bundelen van JavaScript in een project. Elke bundler heeft echter wel een aantal configuratie-opties die in de ene of andere vorm ook aanwezig zijn in alle andere bundlers.
+
+\subsection{Grotendeels Universele Features}
+
+Om te weten wat er gebundeld moet worden, moet er een ingangspunt aanwezig zijn. Dit kan 1 JavaScript bestand zijn of meerderen. Sommige bundlers ondersteunen ook een HTML bestand als ingangspunt, maar functioneel biedt dit geen voordeel. \todo[inline]{TODO: Bron}
+Sommige bundlers, vooral de bundlers die als zero-configuration worden geadverteerd, zullen ook automatisch een ingangspunt veronderstellen als ze niet expliciet is meegegeven (Meestal ``\lstinline{./public/index.js}'').
+
+Als er een ingangspunt is, is er ook een uitgangspunt. Dit kan een enkel bestand zijn, of een folder voor meerdere bestanden.
+
+Bundlers hebben gewoonlijks ook ondersteuning voor plugins. Plugins bieden een extra functionaliteit die de bundler zelf niet levert. Meestal vallen dingen zoals de compressie van afbeeldingen of ESLint validatie hieronder.
+
+Het is ook mogelijk om te onderscheiden tussen de verschillende omgevingen waarin gebundeld wordt, zijnde meestal development, staging en productie. Het kan bijvoorbeeld zijn dat er in een bepaalde omgeving geen nood is aan een bepaald plugin. Standaard is er al een onderscheiding tussen development en productie, waar de productiebuilds dan geen formattering zullen toepassen die normaliter het ontwikkelingsproces vergemakkelijken.
+
+\subsection{De No-bundler Movement}
+
+Bepaalde bundlers, zoals Vitejs, opteren om in een developmentomgeving de bronbestanden niet meer samen te bundelen. Dit betekent niet dat er geen bundler meer nodig is, maar in de plaats daarvan worden de bestanden door de bundler getransformeerd in chunks die moderne browser kunnen interpreteren. Dit zorgt ervoor dat naast de devserver opstarten, er niet al te veel meer moet gebeuren. De tijd om de server te starten zou dan tot 100x minder lang kunnen duren, in enkele seconden of minder. De individuele chunks worden dan ook gecached door de browser, wat betekent dat als er veranderingen gebeuren alleen maar de aangepaste chunks opnieuw geladen moeten worden. Dit is wat in de praktijk HMR, of hot module replacement genoemd wordt. Veel bundlers ondersteunen HMR, maar vaak niet out-of-the-box. Zo niet, kan het ook lastig zijn om werkende te krijgen. \todo[inline]{TODO: Bron}
+
+\missingfigure{TODO: populariteitsgraph van bundlers}
+
+\subsection{De lijst}
+
+In dit onderzoek zal vooral naar de volgende bundlers gekeken worden:
+
+\subsubsection{Webpack}
+
+De populairste en één van de eerdere bundlers in gebruik vandaag is Webpack. Bij veel project-templates wordt Webpack meegeleverd als de standaardbundler. Bij een blanco project kan deze echter ook toegevoegd worden met \lstinline{npm i -D webpack}. Webpack heeft goede ondersteuning en veel plugins om het bundelingsproces te vergemakkelijken. Door de ouderdom van Webpack is er echter veel dat ondersteund moet worden, wat ook nadelen met zich meebrengt. De configuratie voelt onhandig en moeilijk te lezen aan, door de hoeveelheid verschillende plugins nodig zijn om bepaalde taken te bereiken. De syntax van de configuratie is in het algemeen ook niet met te veel ontwikkelaarsvriendelijkheid over termijn in gedachte gemaakt, wat ons naar de volgende optie brengt.
+
+\subsubsection{Rollup}
+
+Rollup is een bundler die zich veel meer focust op productie builds. Webpack doet bijna alles voor een ontwikkelaar. Het bevat standaard een dev server, en kan met veel meer dan alleen JavaScript omweg. Rollup focust zich geheel op het bundelen van de JavaScript op een zo efficiënt mogelijke manier, maar als gevolg heeft Rollup weinig te bieden voor ontwikkelaars tijdens het ontwikkelen zelf. Ook al is de configuratie in het algemeen korter dan Webpack.
+
+\subsubsection{Vitejs}
+
+Vite is een bundler die ontwikkeld is door Evan You, de maker van Vue. Vite is geadverteerd als een zero-configuration bundler die deel is van de no-bundler movement. Onderliggend gebruikt Vite standaard ESBuild om JavaScript en TypeScript te transpileren en bundelen. Dit is echter alleen in een ontwikkelingsomgeving. ESBuild bevat nog niet alle functionaliteit om bruikbaar te zijn in een productieomgeving. In plaats van ESBuild gebruikt Vite Rollup voor productie builds. \autocite{you_2021}
+
+\subsubsection{Parcel}
+
+Parcel is ook een zero-configuration bundler, maar is volledig geschreven met Rust. Onderliggend gebruikt het SWC om JavaScript en TypeScript te transpileren. SWC is een transpiler in Rust geschreven, die een heel goede performantie heeft vergeleken met de met traditionele transpilers. Naast dit is het grootste verschil tussen de 2 dat Parcel wel nog alles bundelt in de ontwikkelingsomgeving. Parcel heeft ook zijn eigen CSS compiler, wat verdere voordelen voor performantie biedt. \autocite{dahan_2021}
+
+\subsubsection{ESBuild}
+
+ESBuild is de jongste bundler die hier vergeleken wordt. Hoewel ESBuild momenteel nog niet aan zijn v1.0.0 release is, is de performantie zeer veelbelovend. ESBuild is geschreven in Go, en is natively compiled per platform. Dit in combinatie met een asynchrone werkwijze zorgt voor een heel goede performantie, die alleen geëvenaard wordt door SWC. Dat is te danken aan hun focus op snelheid en keuze van talen. Rust en Go zijn veel meer performant dan een JavaScript-omgeving kan zijn. \autocite{eaton_2021}
+
+Hoewel ESBuild zeer snel is, is het door zijn jonge leeftijd ook de meest gebrekkige qua features. HMR en code-splitting zijn bijvoorbeeld nog niet geïmplementeerd. \autocite{wallace}
+
+\section{Transpilers}
+
+Transpilers hebben enerzijds als doel de moderne JavaScript die we schrijven om te zetten naar een versie van ECMAScript dat ondersteund wordt door de meeste browsers. Anderzijds kunnen ze ook TypeScript transpileren naar JavaScript. \todo[inline]{TODO: Iets meer info over hoe transpilers werken}
+
+Hoewel elke bundler theoretisch via een plugin elke onafhankelijke transpiler kan gebruiken, is een grote vraag in dit onderzoek of dit de moeite waard is bij alle bundlers. Parcel werkt bijvoorbeeld standaard met SWC. Als Webpack gecombineerd zou worden met SWC, zou de performantie dicht kunnen komen bij die van Parcel? Het bundelen zelf duurt ook nog even, dus het is ook perfect mogelijk dat de tijd gewonnen met SWC als transpiler te gebruiken in Webpack niks is in vergelijking met de gecombineerde snelheid van Parcel en SWC.
+
+\subsection{TSC}
+
+TSC is de standaardtranspiler die met TypeScript komt. Het biedt typechecking aan, waar enige fouten in de TypeScript typering gemeld zullen worden en de transpilatie zullen afbreken.
+
+\begin{lstlisting}
+const exampleValue: string = 5;
+\end{lstlisting}
+
+Deze code zal TSC niet kunnen compileren, aangezien 5 geen string is.
+
+De performantie van TSC is niets speciaal, de typechecking introduceert ook een grote overhead.
+
+\subsection{Babel}
+
+Babel is de meest uitbreidbare transpiler in deze lijst. Er zijn veel plugins beschikbaar om de nieuwste ES proposals te ondersteunen, of om andere syntaxes zoals JSX of Flow te ondersteunen.
+
+Babel is de minst performante van de opties. Het is ook de oudste en net zoals Webpack heeft dat gevolgen gehad op de complexiteit en performantie doorheen de jaren. \todo[inline]{TODO: Bron}
+
+\subsection{Sucrase}
+
+Sucrase is een fork van Babel die bedoeld is om te transpileren naar recente versies van ECMAScript, en zijn focus vooral legt naar het ondersteunen van andere extensies op JavaScript, zoals JSX, TypeScript en Flow. Hierdoor is Sucrase minder uitbreidbaar, maar heel wat sneller. \autocite{pierce}
+
+\subsection{SWC}
+
+SWC is zoals hiervoor vernoemd de standaardtranspiler van Parcel, in Rust geschreven. SWC maakt gebruik van parallellisatie en een performante taal om potentieel meer dan 70x sneller te zijn dan Babel. \autocite{swc}
+
+\todo[inline]{TODO: Meer details over transpilers, meer bronnen citeren}
