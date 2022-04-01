@@ -17,7 +17,61 @@ De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te
   \item \ldots
 \end{itemize}
 
-Er zijn 
+\section{De Geschiedenis van Websites}
+
+Sinds het begin van deze eeuw is er een grote evolutie geweest in hoe websites gebouwd worden. Vroeger waren de meeste websites gewoon een HTML-document met wat stijlen erbij, en hier en daar een klein scriptje. 
+
+In 2006 kwam er echter een nieuwe speler op de markt: JQuery. JQuery loste veel van de problemen op die ondervonden werden in het maken van dynamische websites. Maar, JQuery was ook het begin van een grote evolutie in hoe we websites maakten.
+
+%JQuery was een grote stap in de richting van vandaag. Maar JQuery was vooral gericht naar UI, en had geen elegante manier om met data om te gaan. Dit zorgde voor problemen eenmaal je een website van grotere schaal ging ontwikkelen.
+
+Veel frameworks zijn gekomen en gegaan sinds dan, en het was alles behalve een lineair proces om tot technologie van vandaag te komen. Technologieën zoals Silverlight en Flash, waren wat we noemen \lq Rich internet applications\rq, of RIA's. Vandaag zijn de 2 grootste soorten spelers \lq Single-page applications\rq en \lq Multi-page applications\rq.
+
+% TODO: meer uitleg over de historiek van hoe we geëvolueerd zijn van JQuery -> RIA -> SPA/MPA
+
+\subsection{Multi-page applications (MPA's)}
+
+Een MPA is wat de meeste mensen zouden ervaren als een traditionele website. Elk adres heeft zijn eigen pagina. Wanneer een browser vraagt voor een bepaalde pagina zal de server de bijhorende HTML en eventuele andere bestanden genereren of ophalen, en terugsturen naar de browser. De browser zal vervolgens de HTML, samen met de andere bestanden interpreteren en tonen op het scherm.
+
+De belangrijkste punten om mee te nemen bij het gebruik van MPA's zijn:
+
+\begin{itemize}
+    \item De browser doet niet meer dan het vragen van voor een bepaald pagina.
+    \item Alle logica bevindt zich op de server.
+    \subitem Ergo, alle last bevindt zich op de server.
+\end{itemize}
+
+% TODO: aanvullen en corrigeren
+
+\subsection{Single-page applications (SPA's)}
+
+Een SPA bestaat maar uit één pagina. Die ene pagina bevat alle nodige bundels van scripts, en dus als gevolg alle logica die nodig is op de client. Bij een SPA moet de server je pagina's dus niet genereren. Het enige waarvoor de server nu nog nodig is, is data. Hoewel je nu al je pagina's en logica hebt, moet er nog ergens gevraagd worden om data. Als de website een online receptenboekje is, dan is de data onder andere de recepten zelf. De bundels bevatten de logica om met die recepten om te gaan, maar ze moeten wel nog opgevraagd worden. Hier komt de grote sterkte van SPA's naar boven. De server moet niets meer genereren, alleen nog maar de nodige data terugsturen. Dit is minder werk voor de server.
+
+\section{React}
+
+% TODO: maak een pagina waar alle engelse terminologie wordt uitgelegd.
+% Is deze zin juist?
+Dit onderzoek is voornamelijk in functie van het gebruik van React. React is een library waarmee SPA's gemaakt kunnen worden. Het is ontwikkeld door Facebook in 2013 om het maken van herbruikbare componenten aan te moedigen. Het gebruik van React samen met hun JSX syntax geeft ontwikkelaars een simpele manier om componenten zoals knoppen, hoofdingen etc. aan te maken en overal te gebruiken waar nodig. JSX zorgt voor een makkelijke manier om HTML te mengen met componenten en andere JavaScript code.
+
+In essentie zullen 3 relevante bestanden aangemaakt worden wanneer een standaard React app wordt aangemaakt: index.html, index.js en App.js.\footnote{Via de create-react-app command-line tool.} Index.html bevat de standaard HTML-code voor een website, en één div-element met id ``root''. Index.js is het ingangspunt van React, en gaat de div met id ``root'' vervangen met de JSX die zich bevindt in App.js.
+
+Theoretisch kan nu dus gewerkt worden in App.js om de website op te bouwen. In de realiteit wordt dit niet gedaan, aangezien dat zelfs een simpele website heel snel moeilijk wordt te navigeren door de ontwikkelaar. Wat zal gebeuren is dat de code voor pagina's en componenten tot een zekere mate gesplitst worden. Typisch zal in App.js een router geplaatst worden, die zal zorgen voor de navigatie. Dit simuleert het gevoel van een MPA met verschillende pagina's. Dan zal zich onder elk gedefinieerd pad een component bevinden die code voor de respectievelijke pagina bevat.
+
+Er zijn dus veel verschillende bestanden aanwezig, elk met een andere bouwsteen van de website. Het is echter inefficiënt of zelfs onmogelijk om deze direct in de browser te laden. Tot circa 2018 had bijna geen enkele browser ondersteuning om meerdere modules tegelijk te laden. En zelfs met die ondersteuning heeft het nog steeds een aantal nadelen, voornamelijk dat het veel minder efficiënt voor een browser is om veel kleine bestanden op te halen, vergeleken met één groot bestand. Voor 2018 was er dus zelfs geen sprake van de modules apart op te halen, dus moest er gebruik worden gemaakt van JavaScript bundlers.
+
+% TODO: Fix sections
+\section{Bundlers}
+
+Een JavaScript bundler bundelt de aparte JavaScript bestanden samen, zodat je met één gecombineerd bestand eindigt. Nu is een groot deel van de problemen opgelost, maar nog niet alles.
+
+\section{Browserondersteuning}
+
+De ondersteuning van JavaScript in browsers is beperkt tot wat de ontwikkelaars van de browsers kiezen. Er bestaat een standaard genaamd ECMAScript dat jaarlijks een nieuwe editie heeft. Elke nieuwe editie onvangt een aantal nieuwe features van de JavaScript taal. Browsers implementeren de ondersteuning van JavaScript echter niet volledig volgens ECMAScript edities. Ze werken er meestal naar toe, maar het kan even duren voor een browser een bepaalde ES\footnote{Afkorting van ECMAScript}-versie volledig ondersteund. We kunnen dus niet zomaar op de laatste ES-versie onze Reactapplicaties maken. We moeten eerst onze moderne code transpileren naar een versie die compatibel is met zo goed als alle browsers. Hiervoor worden transpilers gebruikt.
+
+\section{TypeScript}
+
+Waar transpilers ook gebruikt voor worden is TypeScript. 
+
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
