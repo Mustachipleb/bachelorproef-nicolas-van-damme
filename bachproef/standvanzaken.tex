@@ -22,7 +22,7 @@ Om van slag te gaan met de bundlers en transpilers, is het handig om ook eerst e
 
 \section{npm en Yarn}
 
-Wanneer er aan een Node project gewerkt wordt, zal er waarschijnlijk gebruik gemaakt worden van npm. npm staat voor Node Package Manager, en zoals de naam impliceert is npm een tool om JavaScript-libraries binnen je project te beheren. Alle projecten die hieronder besproken zullen worden zijn dan ook beschikbaar op \href{https://www.npmjs.com/}{de npm-website}.
+Wanneer er aan een Node project gewerkt wordt, zal er waarschijnlijk gebruik gemaakt worden van npm. npm staat voor Node Package Manager en zoals de naam impliceert, is npm een tool om JavaScript-libraries binnen een project te beheren. Alle projecten die hieronder besproken zullen worden zijn dan ook beschikbaar op \href{https://www.npmjs.com/}{de npm-website}.
 
 \subsection{Initialisatie}
 
@@ -52,21 +52,21 @@ Het wordt aangeraden om packages die niet nodig zijn om het project uit te voere
 
 \subsubsection{Peer Dependencies}
 
-Alle packages op npm zijn zelf ook npm-projecten. Dit betekent dus dat zij ook allemaal een package.json hebben, en afhankelijk zijn van bepaalde packages. Een peer dependency is een dependency die niet door de ontwikkelaar zelf wordt toegevoegd, maar door een andere package die de ontwikkelaar toegevoegd heeft.
+Peer dependencies zijn packages die een auteur van een library aanduiden als nodig zijnde binnen het project dat die library gebruikt, maar ze niet zelf installeert. In een situatie waar er een project is met dependencies ``Foo'' versie 1.0 en ``Bar'' versie 2.0, waar Bar versie 1.0 een dependency is in Foo, kan dit problemen geven zonder gebruik te maken van peer dependencies. Als Foo 1.0 alleen intern gebruik maakt van Bar 1.0, dan kan het geen kwaad dat Bar 2.0 ook aanwezig is in het project. Dit veranderd wanneer Foo bijvoorbeeld een instantie van Bar aanvaard in één van zijn methodes. Als Foo zelf afhankelijk is van Bar 1.0, en er ineens een instantie van Bar 2.0 gegeven wordt aan Foo, dan is het niet moeilijk in te beelden wat voor problemen dat kan veroorzaken.
 
-Het is dus makkelijk om zich voor te stellen dat dit na een tijd leidt naar heel veel dependencies. Gelukkig doet npm aan ``dependency resolution'', waar zoveel mogelijk duplicate dependencies en conflicten opgelost worden.
+Hier is waar peer dependencies hun nut doen blijken. Als Foo expliciet Bar declareert als een peer dependency, zal er maar één versie van Bar geïnstalleerd kunnen worden. Indien Bar dan niet geïnstalleerd is als dependency in het project of er een incompatibele versie aanwezig is, geeft npm een waarschuwing. \autocite{de_witt_2016}
 
 \subsection{Yarn}
 
-npm is niet de enige package manager. Één van de andere opties is Yarn. Yarn werkt op veel vlakken op een gelijkaardige manier. Beiden tools bestaan voor dezelfde doeleinden, en gebruiken de npm repository om hun packages op te halen. Waar Yarn wél licht in verschilt is hoe het omgaat met het installeren van packages, en het dependency resolution proces. Yarn installeert alle packages in parallel, wat resulteert in veel een sneller installatieproces vergeleken met de synchrone installatie van npm. Op het vlak van dependency resolution is Yarn iets consistenter. Yarn kijkt naar de versie-definitie, terwijl npm kijkt naar de de eigenlijke versie. \autocite{Kay2021} \todo[inline]{TODO: Wat meer info geven over de versie-definities.}
+npm is niet de enige package manager. Één van de andere opties is Yarn. Yarn werkt op veel vlakken op een gelijkaardige manier. Beiden tools bestaan voor dezelfde doeleinden, en gebruiken de npm repository om hun packages op te halen. Waar Yarn wél licht in verschilt, is hoe het omgaat met het installeren van packages, en het dependency resolution proces. Yarn installeert alle packages in parallel, wat resulteert in veel een sneller installatieproces vergeleken met de synchrone installatie van npm. Op het vlak van dependency resolution is Yarn iets consistenter. Yarn kijkt naar de versie-definitie, terwijl npm kijkt naar de eigenlijke versie. \autocite{Kay2021} \todo[inline]{TODO: Wat meer info geven over de versie-definities.}
 
-Binnen Codifly wordt altijd Yarn gebruikt, en alle experimenten zullen ter gevolge ook via Yarn uitgevoerd worden. Als een Yarn-commando gebruikt wordt zal de npm-equivalent ook toegelicht worden.
+Binnen Codifly wordt altijd Yarn gebruikt, en alle experimenten zullen ter gevolge ook via Yarn uitgevoerd worden. Als een Yarn-commando gebruikt wordt, zal de npm-equivalent ook toegelicht worden.
 
 \section{Bundlers}
 
-Bundlers hebben als doel je modulaire JavaScript-code samen te bundelen in 1 bestand voor consumptie op het web. In het verleden konden browsers niet verschillende modules inladen, en hoewel dat nu wel vaak het geval is, heeft het nog steeds zijn voordelen. HTTP/2 biedt browsers de mogelijkheid aan om veel meer dan de hiervoor traditionele 6 verbindingen met een server te openen. Dit is goed als er veel verschillende modules ingeladen moeten worden, maar het lost niet alles op. De browser moet nog steeds 1 per 1 de boom van dependencies afgaan, en pas wanneer er een nieuwe dependency gevonden wordt, wordt die opgevraagd. Ook compressie is minder efficiënt in vele kleinere chunks dan één grote bundel. \autocite{you_2021} Verder is er ook het probleem dat veel externe packages, hoewel ze in ESM syntax geschreven worden, gepubliceerd worden in CJS formaat. CJS formaat is echter niet leesbaar door browsers zonder hulp van een library zoals RequireJS. \autocite{sweeney_2020}
+Bundlers hebben als doel modulaire JavaScript-code samen te bundelen in 1 bestand voor consumptie op het web. In het verleden konden browsers niet verschillende modules inladen, en hoewel dat nu wel vaak het geval is, heeft het nog steeds zijn voordelen. HTTP/2 biedt browsers de mogelijkheid aan om veel meer dan de hiervoor traditionele 6 verbindingen met een server te openen. Dit is goed als er veel verschillende modules ingeladen moeten worden, maar het lost niet alles op. De browser moet nog steeds 1 per 1 de boom van dependencies afgaan, en pas wanneer er een nieuwe dependency gevonden wordt, wordt die opgevraagd. Ook compressie is minder efficiënt in vele kleinere chunks dan één grote bundel. \autocite{you_2021} Verder is er ook het probleem dat veel externe packages, hoewel ze in ESM syntax geschreven worden, gepubliceerd worden in CJS formaat. CJS formaat is echter niet leesbaar door browsers zonder hulp van een library zoals RequireJS. \autocite{sweeney_2020}
 
-Een bundler bereikt dit door via het ingangspunt van je JavaScript alles te scannen, wanneer de bundler een nieuwe import tegenkomt zal die ook daardoor gaan. Dit proces noemt het bouwen van de dependency graph. Op basis daarvan zal de bundler weten wat er allemaal toegevoegd zal moeten worden aan de bundel.
+Een bundler bereikt dit door via het ingangspunt van de JavaScript alles te scannen, wanneer de bundler een nieuwe import tegenkomt, zal die ook daardoor gaan. Dit proces noemt het bouwen van de dependency graph. Op basis daarvan zal de bundler weten wat er allemaal toegevoegd zal moeten worden aan de bundel.
 
 Er zijn veel opties voor het bundelen van JavaScript in een project. Elke bundler heeft echter wel een aantal configuratie-opties die in de ene of andere vorm ook aanwezig zijn in alle andere bundlers.
 
@@ -77,7 +77,7 @@ Sommige bundlers, vooral de bundlers die als zero-configuration worden geadverte
 
 Als er een ingangspunt is, is er ook een uitgangspunt. Dit kan een enkel bestand zijn, of een folder voor meerdere bestanden.
 
-Bundlers hebben gewoonlijks ook ondersteuning voor plugins. Plugins bieden een extra functionaliteit die de bundler zelf niet levert. Meestal vallen dingen zoals de compressie van afbeeldingen of ESLint validatie hieronder.
+Bundlers hebben gewoonlijks ook ondersteuning voor plugins. Plugins bieden een extra functionaliteit die de bundler zelf niet levert. Meestal valt functionaliteit zoals de compressie van afbeeldingen of ESLint validatie hieronder.
 
 Het is ook mogelijk om te onderscheiden tussen de verschillende omgevingen waarin gebundeld wordt, zijnde meestal development, staging en productie. Het kan bijvoorbeeld zijn dat er in een bepaalde omgeving geen nood is aan een bepaald plugin. Standaard is er al een onderscheiding tussen development en productie, waar de productiebuilds dan geen formattering zullen toepassen die normaliter het ontwikkelingsproces vergemakkelijken.
 
@@ -87,7 +87,7 @@ Bepaalde bundlers, zoals Vitejs, opteren om in een developmentomgeving de bronbe
 
 \missingfigure{TODO: populariteitsgraph van bundlers}
 
-\subsection{De lijst}
+\subsection{De Lijst} \todo[inline]{TODO: betere titel voor deze sectie.}
 
 In dit onderzoek zal vooral naar de volgende bundlers gekeken worden:
 
@@ -105,7 +105,7 @@ Vite is een bundler die ontwikkeld is door Evan You, de maker van Vue. Vite is g
 
 \subsubsection{Parcel}
 
-Parcel is ook een zero-configuration bundler, maar is volledig geschreven met Rust. Onderliggend gebruikt het SWC om JavaScript en TypeScript te transpileren. SWC is een transpiler in Rust geschreven, die een heel goede performantie heeft vergeleken met de met traditionele transpilers. Naast dit is het grootste verschil tussen de 2 dat Parcel wel nog alles bundelt in de ontwikkelingsomgeving. Parcel heeft ook zijn eigen CSS compiler, wat verdere voordelen voor performantie biedt. \autocite{dahan_2021}
+Parcel is ook een zero-configuration bundler, maar is volledig geschreven met Rust. Onderliggend gebruikt het SWC om JavaScript en TypeScript te transpileren. SWC is een transpiler in Rust geschreven, die een heel goede performantie heeft vergeleken met de met traditionele transpilers. Naast dit is het grootste verschil tussen de twee dat Parcel wel nog alles bundelt in de ontwikkelingsomgeving. Parcel heeft ook zijn eigen CSS compiler, wat verdere voordelen voor performantie biedt. \autocite{dahan_2021}
 
 \subsubsection{ESBuild}
 
@@ -133,7 +133,7 @@ De performantie van TSC is niets speciaal, de typechecking introduceert ook een 
 
 \subsection{Babel}
 
-Babel is de meest uitbreidbare transpiler in deze lijst. Er zijn veel plugins beschikbaar om de nieuwste ES proposals te ondersteunen, of om andere syntaxes zoals JSX of Flow te ondersteunen.
+Babel is de meest uitbreidbare transpiler in deze lijst. Er zijn veel plugins beschikbaar om de nieuwste ES-voorstellen te ondersteunen, of om andere syntaxes zoals JSX of Flow te ondersteunen.
 
 Babel is de minst performante van de opties. Het is ook de oudste en net zoals Webpack heeft dat gevolgen gehad op de complexiteit en performantie doorheen de jaren. \todo[inline]{TODO: Bron}
 
@@ -145,4 +145,4 @@ Sucrase is een fork van Babel die bedoeld is om te transpileren naar recente ver
 
 SWC is zoals hiervoor vernoemd de standaardtranspiler van Parcel, in Rust geschreven. SWC maakt gebruik van parallellisatie en een performante taal om potentieel meer dan 70x sneller te zijn dan Babel. \autocite{swc}
 
-\todo[inline]{TODO: Meer details over transpilers, meer bronnen citeren}
+\todo[inline]{TODO: Meer details over transpilers, meer bronnen citeren en terminologie uitleggen.}
