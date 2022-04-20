@@ -11,5 +11,78 @@
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
 
-\lipsum[21-25]
+Om te kunnen achterhalen welke combinatie van bundler en transpiler beide een efficiënte en betrouwbare keuze zou zijn voor gebruik binnen Codifly, zijn er de volgende overwegingen die gemaakt moesten gemaakt worden:
 
+\section{Wat wilt Codifly?}
+
+Hier kan er onderscheid gemaakt worden tussen 2 categorieën: Het belang van de business, en het belang van de ontwikkelaar. Een ideale oplossing zou beiden de business en ontwikkelaars tevreden houden.
+
+\subsection{De Noden van de Ontwikkelaars}
+
+Om te peilen wat voor technische features aanwezig zouden moeten zijn, is de onderzoeker van plan een anonieme vragenlijst te presenteren aan de ontwikkelaar binnen Codifly. Deze vragenlijst zal de volgende vragen bevatten:
+
+\begin{itemize}
+    \item Een verzameling van veelvoorkomende features in bundlers, met als vraag een ordinale score van 1 tot en met 6 te geven op het belang van die feature.
+    \begin{description}
+        \item[Mogelijke antwoorden:] \hfill
+        \begin{enumerate}
+            \item Ik weet het niet / Ik ben niet zeker
+            \item Helemaal niet belangrijk
+            \item Niet belangrijk
+            \item Heeft toepassingen
+            \item Zeer belangrijk
+            \item Dit is essentieel
+        \end{enumerate}
+        \item[Features:] \hfill
+        \begin{itemize}
+            \item Code-splitting
+            \item Zero-configuration
+            \item High speed bundling
+            \item Customisability
+            \item ES5 Support
+            \item Dynamic expressions in import
+            \item Typescript typechecking
+            \item Hot module replacement
+        \end{itemize}
+    \end{description}
+    \item Optionele andere feature(s) waar de ontwikkelaar belang aan hecht.
+    \item Andere opmerkingen
+\end{itemize}
+
+\todo[inline]{TODO: de features hierboven ook zeker allemaal coveren in lit. studie}
+
+\subsection{De Noden van de Business}
+
+De voornaamste zorg vanuit het business-aspect is de configuratie van de bundler. Vaak kan er veel tijd gegoten worden in het oplossen van bepaalde problemen die gerelateerd zijn aan de configuratie van Webpack. Daarom is het volgens Arvid, één van de bedrijfsleiders van Codifly en de co-promotor van deze paper, het belangrijkste aspect in de keuze van bundler.
+
+Performantie is in de ogen van de business iets minder belangrijk dan de configuratie.
+
+\todo[inline]{TODO: is dit zelfs passend bij methodologie? Moet het niet bij conclusie?}
+
+Codifly richt zich voornamelijk op een ``one-size-fits-all'' oplossing. Er bestaat een seed-project dat een project-template bijhoudt voor gebruik in de meeste nieuwe projecten.
+
+Een snelle opstart met een voorgedefinieerde configuratie of minimale configuratie is als gevolg een belangrijke metric.
+
+\section{Praktische Testen}
+
+Om kwantitatieve resultaten te behalen heeft de onderzoeker de keuze genomen de performantie van een aantal reële en niet-reële projecten te meten met de onder dit onderzoek gestaafde bundlers. Omdat de huidige React-projecten binnen Codifly allemaal Webpack gebruiken, zal Webpack ook voornamelijk dienen als referentie in deze testen.
+
+\subsection{De Gebruikte Projecten}
+
+Er zal hier een onderscheid zijn tussen reële projecten en niet-reële projecten. Voor praktische redenen, zoals de tijd die het kan nemen om een dergelijke migratie uit te voeren, zal er een mix zijn van projecten die bestaan binnen Codifly en projecten die puur voor variatie aanwezig zijn.
+
+\subsubsection{Interne Projecten}
+
+De primaire motivatie achter deze keuzes is dat de onderzoeker al dergelijke kennis heeft van deze projecten, wat het proces van het migreren zal vergemakkelijken.
+
+De volgende interne projecten van Codifly zullen aangekaart worden:
+
+\paragraph{De corporate website van Codifly}
+
+De website van Codifly, beschikbaar op \href{https://www.codifly.be}{www.codifly.be}. Dit project is in 2021 herwerkt van JavaScript + Flow naar Typescript. Als resultaat is dit een vrij moderne codebase om mee te werken, wat een goed beeld geeft op hoe de bundlers zouden omgaan met een nieuw project.
+
+Ook een voor- en nadeel is het feit dat er geen complexe API-calls uitgevoerd worden. Het enige waar dat in het project voor nodig is, is voor de inzendingen van een formulier via mail. Dit betekent dus enerzijds dat de migratie naar verschillende bundlers minder op conflicten zou mogen stuiten, maar anderzijds geeft dit dan ook een minder goed beeld op de interacties met API-projecten.
+
+\paragraph{Het webplatform van Depannage Steps}
+
+\todo[inline]{TODO: Pretty sure dat DS een te lage nodejs versie gebruikt om vite en esbuild te testen, verify this.}
