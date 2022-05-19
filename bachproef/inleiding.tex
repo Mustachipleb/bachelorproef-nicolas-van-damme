@@ -45,7 +45,7 @@ De belangrijkste punten om mee te nemen bij het gebruik van MPA's zijn:
 
 \subsection{Single-page applications (SPA's)}
 
-Een SPA bestaat maar uit één pagina. Die ene pagina bevat alle nodige bundels van scripts, en dus als gevolg alle logica die nodig is op de client. Bij een SPA moet de server je pagina's dus niet genereren. Het enige waarvoor de server nu nog nodig is, is data. Hoewel je nu al je pagina's en logica hebt, moet er nog ergens gevraagd worden om data. Als de website een online receptenboekje is, dan is de data onder andere de recepten zelf. De bundels bevatten de logica om met die recepten om te gaan, maar ze moeten wel nog opgevraagd worden. Hier komt de grote sterkte van SPA's naar boven. De server moet niets meer genereren, alleen nog maar de nodige data terugsturen. Dit is minder werk voor de server.
+Een SPA bestaat maar uit één pagina. Die ene pagina bevat alle logica die nodig is op de client. Bij een SPA moet de server de pagina's dus niet genereren. Het enige waarvoor de server hierbij nodig is, is data. Als de website een online receptenboekje is, dan is de data onder andere de recepten zelf. De bundels bevatten de logica om met die recepten om te gaan, maar ze moeten wel nog opgevraagd worden. Hier komt de grote sterkte van SPA's naar boven. De server moet niets meer genereren, alleen nog maar de nodige data terugsturen. Dit is veel minder werk voor de server.
 
 \section{React}
 
@@ -53,7 +53,13 @@ Een SPA bestaat maar uit één pagina. Die ene pagina bevat alle nodige bundels 
 % Is deze zin juist?
 Dit onderzoek is voornamelijk in functie van het gebruik van React. React is een library waarmee SPA's gemaakt kunnen worden. Het is ontwikkeld door Facebook in 2013 om het maken van herbruikbare componenten aan te moedigen. Het gebruik van React samen met hun JSX syntax geeft ontwikkelaars een simpele manier om componenten zoals knoppen, hoofdingen etc. aan te maken en overal te gebruiken waar nodig. JSX zorgt voor een makkelijke manier om HTML te mengen met componenten en andere JavaScript code.
 
-In essentie zullen 3 relevante bestanden aangemaakt worden wanneer een standaard React app wordt aangemaakt: index.html, index.js en App.js.\footnote{Via de create-react-app command-line tool.} Index.html bevat de standaard HTML-code voor een website, en één div-element met id ``root''. Index.js is het ingangspunt van React, en gaat de div met id ``root'' vervangen met de JSX die zich bevindt in App.js.
+\subsection{Opbouw van een create-react-app Applicatie}
+
+``create-react-app'' is een npm-package die bepaalde templates bevat voor een react-applicatie te maken. De die hieronder wordt uitgelegd is die dat ``create-react-app'' aanmaakt, maar dit betekent niet dat dit altijd zo moet zijn. 
+
+In essentie zullen 3 relevante bestanden aangemaakt worden wanneer via ``create-react-app'' een app wordt gescaffold\footnote{Het aanmaken van de ondersteunend elementen, in dit geval de basisstructuur van een webapplicatie.}: index.html, index.js en App.js. Index.html bevat de standaard HTML-code voor een website, en één div-element met een (in het geval van create-react-app) id ``root''. Index.js is het ingangspunt van React, en gaat de div met id ``root'' vervangen met de JSX die zich bevindt in App.js.
+
+Een belangrijke onderscheiding die hier ook gemaakt moet worden is het verschil tussen een library en framework. React is een library, en biedt enkel de functionaliteit(en) aan die hij bezit. Frameworks breiden hierop uit door daarrond een volledige methodologie op te bouwen. React biedt alle functies aan om een SPA op te bouwen, maar React zal de structuur van een applicatie en de gebruikte werkmethode nooit tegenspreken, of ze nu goed en/of slecht zijn. Bij een framework is dit anders. Meestal is er bij een framework maar 1 methodologie die als correct beschouwd wordt. Afwijken van die methodologie is ofwel sterk afgeraden of simpelweg niet mogelijk. \autocite{roy_2022}
 
 Theoretisch kan nu dus gewerkt worden in App.js om de website op te bouwen. In de realiteit wordt dit niet gedaan, aangezien dat zelfs een simpele website heel snel moeilijk wordt te navigeren door de ontwikkelaar. Wat zal gebeuren is dat de code voor pagina's en componenten tot een zekere mate gesplitst worden. Typisch zal in App.js een router geplaatst worden, die zal zorgen voor de navigatie. Dit simuleert het gevoel van een MPA met verschillende pagina's. Dan zal zich onder elk gedefinieerd pad een component bevinden die code voor de respectievelijke pagina bevat.
 

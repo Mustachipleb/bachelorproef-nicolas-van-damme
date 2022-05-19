@@ -57,8 +57,6 @@ De voornaamste zorg vanuit het business-aspect is de configuratie van de bundler
 
 Performantie is in de ogen van de business iets minder belangrijk dan de configuratie.
 
-\todo[inline]{TODO: is dit zelfs passend bij methodologie? Moet het niet bij conclusie?}
-
 Codifly richt zich voornamelijk op een ``one-size-fits-all'' oplossing. Er bestaat een seed-project dat een project-template bijhoudt voor gebruik in de meeste nieuwe projecten.
 
 Een snelle opstart met een voorgedefinieerde configuratie of minimale configuratie is als gevolg een belangrijke metric.
@@ -69,9 +67,15 @@ Om kwantitatieve resultaten te behalen heeft de onderzoeker de keuze genomen de 
 
 Er zal hier een onderscheid zijn tussen reële projecten en niet-reële projecten. Voor praktische redenen, zoals de tijd die het kan nemen om een dergelijke migratie uit te voeren, zal er een mix zijn van projecten die bestaan binnen Codifly en projecten die puur voor variatie aanwezig zijn.
 
-Per project is het doel om concrete data te verzamelen over hoe lang het duurt vanaf het startcommando tot de webserver draait en de website zichtbaar is. Om betrouwbare data te verzamelen zal per bundeler ook geöogd worden om minstens 5 instanties van compilatie op te meten. Elke instantie bevat 2 meetpunten, enerzijds de tijd om de bundel initieel aan te maken, en anderzijds de tijd die het duurt voor de browser om de pagina te laden. Dit is omdat in sommige gevallen het merendeel van de laadtijd gebeurd in de browser, met name bundlers die onder de no-bundler movement vallen.
+Per project zullen meerdere metingen gemaakt worden voor de bundlers:
 
-\todo[inline]{}
+\begin{itemize}
+    \item De build-tijd van de dev-server.
+    \item De laadtijd van de pagina in de browser, gemeten aan de hand van de \href{https://chrome.google.com/webstore/detail/page-load-time/fploionmjgeclbkemipmkogoaohcdbig?hl=en}{'Page load time' plugin op de Chrome-store}.
+    \item De tijd die het neemt om de website te herladen.
+    \item De tijd die het neemt om de website te herladen zonder browsercache.
+    \item Een manuele meting vanaf het moment dat het startcommando gegeven wordt, tot het volledige laden van de website met een verwachte foutmarge van +-500ms.
+\end{itemize}
 
 \subsection{Interne Projecten}
 
@@ -79,12 +83,14 @@ De primaire motivatie achter deze keuzes is dat de onderzoeker al dergelijke ken
 
 De volgende interne projecten van Codifly zullen aangekaart worden:
 
+\subsection{Het seed-project}
+
+Het seed-project bevat de in-house startcode, opgesteld door het R\&D team van Codifly. Dit is een simpel project, perfect om mee van start te gaan. Aangezien dit ook het startpunt is voor nieuwe projecten is dit ideaal om resultaten op te verzamelen.
+
 \subsubsection{De corporate website van Codifly}
 
 De website van Codifly, beschikbaar op \href{https://www.codifly.be}{www.codifly.be}. Dit project is in 2021 herwerkt van JavaScript + Flow naar Typescript. Als resultaat is dit een vrij moderne codebase om mee te werken, wat een goed beeld geeft op hoe de bundlers zouden omgaan met een nieuw project.
 
 Ook een voor- en nadeel is het feit dat er geen complexe API-calls uitgevoerd worden. Het enige waar dat in het project voor nodig is, is voor de inzendingen van een formulier via mail. Dit betekent dus enerzijds dat de migratie naar verschillende bundlers minder op conflicten zou mogen stuiten, maar anderzijds geeft dit dan ook een minder goed beeld op de interacties met API-projecten.
 
-\subsubsection{Het webplatform van Depannage Steps}
-
-\todo[inline]{TODO: Pretty sure dat DS een te lage nodejs versie gebruikt om vite en esbuild te testen, verify this.}
+\todo[inline]{TODO: extern project}

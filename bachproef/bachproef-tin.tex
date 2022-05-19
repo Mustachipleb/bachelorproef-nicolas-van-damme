@@ -7,6 +7,7 @@
 
 \usepackage{hogent-thesis-titlepage} % Titelpagina conform aan HOGENT huisstijl
 \usepackage{import}
+\usepackage{pdfpages}
 \usepackage{listings}
 \lstset{
 basicstyle=\small\ttfamily,
@@ -120,6 +121,19 @@ breaklines=true
 
 \appendix
 \renewcommand{\chaptername}{Appendix}
+
+\chapter{Vragenlijst Developers}
+
+\includepdf[pages=1, landscape=true]{./appendix/survey-developers-questions.pdf}
+
+\chapter{Resultaten Vragenlijst Developers}
+
+\includepdf[pages={1-4}]{./appendix/survey-developers-answers.pdf}
+
+\chapter{Resultaten Benchmarks}
+\label{appendix:benchmarks}
+
+\includepdf[pages={1-3}]{./appendix/results.pdf}
 
 %%---------- Onderzoeksvoorstel -----------------------------------------------
 

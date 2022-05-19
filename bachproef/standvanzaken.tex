@@ -97,7 +97,11 @@ De populairste en één van de eerdere bundlers in gebruik vandaag is Webpack. B
 
 \subsubsection{Rollup}
 
-Rollup is een bundler die zich veel meer focust op productie builds. Webpack doet bijna alles voor een ontwikkelaar. Het bevat standaard een dev server, en kan met veel meer dan alleen JavaScript omweg. Rollup focust zich geheel op het bundelen van de JavaScript op een zo efficiënt mogelijke manier, maar als gevolg heeft Rollup weinig te bieden voor ontwikkelaars tijdens het ontwikkelen zelf. Ook al is de configuratie in het algemeen korter dan Webpack.
+Rollup is een bundler die zich veel meer focust op productie-builds. Webpack doet bijna alles voor een ontwikkelaar, maar Rollup focust zich echter geheel op het bundelen van de JavaScript op een zo efficiënt mogelijke manier, maar als gevolg heeft Rollup weinig te bieden voor ontwikkelaars tijdens het ontwikkelen zelf. Ook al is de configuratie in het algemeen korter dan Webpack.
+
+Rollup is ontworpen om met ES modules om te gaan, en niet CommonJS. Het bundelen zelf is barebones, gefocused op het minimum dat nodig is om een goede productie-build te maken. Hier kan via plugins dan veel uitgebreidt worden. Dit heeft als gevolg een grote impact op de complexiteit van de configuratie vergeleken met Webpack. Omdat Webpack zo veel legacy moet ondersteunen en feature-rich is, is de configuratie vaak complex en moeilijk leesbaar. Dit in een strijd tussen de ontwikkelaar en bundler. Bij Rollup is dit echter anders, Rollup interpreteerd niet veel naast JavaScript en TypeScript. CSS en afbeeldingen kan Rollup bijvoorbeeld niet zonder resolvers van derden interpreteren. \autocite{sweeney_2020}
+
+Rollup voor een ontwikkelaar biedt niet veel meer dan watch-functionaliteit. Er is geen hot module replacement of een webserver. Rebuilden duurt ook volgens \textcite{sweeney_2020} lang omwille van de zware optimalisatie die bedoeld is voor productie-builds. Voor die redenen is Rollup zelf niet ideaal voor React-applicaties. Er bestaat echter wél een andere bundler die de functionaliteit, plugins en configuratie van Rollup biedt, maar met de ontwikkelaar in gedachte.
 
 \subsubsection{Vitejs}
 
