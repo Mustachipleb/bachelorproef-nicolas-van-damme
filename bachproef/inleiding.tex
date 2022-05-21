@@ -5,94 +5,161 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+%De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+%\begin{itemize}
+%  \item context, achtergrond
+%  \item afbakenen van het onderwerp
+%  \item verantwoording van het onderwerp, methodologie
+%  \item probleemstelling
+%  \item onderzoeksdoelstelling
+%  \item onderzoeksvraag
+%  \item \ldots
+%\end{itemize}
 
-\section{De Geschiedenis van Websites}
+\section{Een Korte Geschiedenis van Websites}
 
 Sinds het begin van deze eeuw is er een grote evolutie geweest in hoe websites gebouwd worden. Vroeger waren de meeste websites gewoon een HTML-document met wat stijlen erbij, en hier en daar een klein scriptje. 
 
 In 2006 kwam er echter een nieuwe speler op de markt: JQuery. JQuery loste veel van de problemen op die ondervonden werden in het maken van dynamische websites. Maar, JQuery was ook het begin van een grote evolutie in hoe we websites maakten.
 
-%JQuery was een grote stap in de richting van vandaag. Maar JQuery was vooral gericht naar UI, en had geen elegante manier om met data om te gaan. Dit zorgde voor problemen eenmaal je een website van grotere schaal ging ontwikkelen.
-
-Veel frameworks zijn gekomen en gegaan sinds dan, en het was alles behalve een lineair proces om tot technologie van vandaag te komen. Technologieën zoals Silverlight en Flash, waren wat we noemen \lq Rich internet applications\rq, of RIA's. Vandaag zijn de 2 grootste soorten spelers \lq Single-page applications\rq en \lq Multi-page applications\rq.
-
-\todo[inline]{TODO: meer uitleg over de historiek van hoe we geëvolueerd zijn van JQuery -> RIA -> SPA/MPA?}
+Veel frameworks zijn opgekomen sinds dan, en het was alles behalve een lineair proces om tot de technologie van vandaag te komen. Technologieën zoals Silverlight en Flash, waren wat we noemen \lq Rich internet applications\rq, of RIA's. Vandaag zijn echter de 2 grootste soorten spelers \lq Single-page applications\rq en \lq Multi-page applications\rq.
 
 \subsection{Multi-page applications (MPA's)}
 
 Een MPA is wat de meeste mensen zouden ervaren als een traditionele website. Elk adres heeft zijn eigen pagina. Wanneer een browser vraagt voor een bepaalde pagina zal de server de bijhorende HTML en eventuele andere bestanden genereren of ophalen, en terugsturen naar de browser. De browser zal vervolgens de HTML, samen met de andere bestanden interpreteren en tonen op het scherm.
 
-De belangrijkste punten om mee te nemen bij het gebruik van MPA's zijn:
-
-\begin{itemize}
-    \item De browser doet niet meer dan het vragen van voor een bepaald pagina.
-    \item Alle logica bevindt zich op de server.
-    \subitem Ergo, alle last bevindt zich op de server.
-\end{itemize}
-
-\todo[inline]{TODO: aanvullen en corrigeren}
+Het belangrijkste punt om te onthouden bij het ontwikkelen van MPA's is dat de HTML-code van de gevraagde pagina gegenereerd wordt door de server, wat betekent dat de meeste last op de server zit.
 
 \subsection{Single-page applications (SPA's)}
 
-Een SPA bestaat maar uit één pagina. Die ene pagina bevat alle logica die nodig is op de client. Bij een SPA moet de server de pagina's dus niet genereren. Het enige waarvoor de server hierbij nodig is, is data. Als de website een online receptenboekje is, dan is de data onder andere de recepten zelf. De bundels bevatten de logica om met die recepten om te gaan, maar ze moeten wel nog opgevraagd worden. Hier komt de grote sterkte van SPA's naar boven. De server moet niets meer genereren, alleen nog maar de nodige data terugsturen. Dit is veel minder werk voor de server.
+Een SPA bestaat in essentie maar uit één pagina. Door middel van JavaScript (of WebAssembly, in het geval van \href{https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor}{Blazor}) kan die ene pagina gemanipuleerd worden aan de hand van code. Die code bevat stukjes HTML die selectief gerendered kunnen worden afhankelijk van de staat van je applicatie. Een simpel voorbeeld hiervan is dat je doorverwezen wordt naar de login-pagina als je niet ingelogd bent. De staat van de applicatie beschrijft dat er geen bestaande sessie is, en de applicatie stuurt de gebruiker naar de login-pagina.
+
+Het is echter wel enig zins inaccuraat om het een pagina te noemen. Bij SPA's wordt gebruikt gemaakt van componenten. Een component is een stukje HTML dat meestal op zichzelf kan bestaan. De login-pagina is een component, dat in zijn simpelste vorm velden bevat voor gebruikersnaam en wachtwoord en een inlogknop. Stel nu dat de velden en de knop een bepaalde huisstijl hebben, gecombineerd met het feit dat een veld en een knop waarschijnlijk hergebruikt zullen worden, dan is het ook logisch dat die velden en de knop ook een aparte component zijn.
+
+Dat is de algemene structuur van een SPA. Een ``root-component'' dat aftakt in een component per pagina, waar dan verdere componenten in gebruikt worden. Dit vormt een boom-structuur.
+
+\subsubsection{Een uitzondering: SSR}
+
+Server Side Rendering, afgekort als SSR, is het doorschuiven van de verantwoordelijkheid van het renderen binnen een SPA naar de server. Het resultaat hiervan is dat het gedrag en structuur van de applicatie dezelfde is als een traditionele SPA, maar dat het render-gedrag gelijkaardig aan een MPA gebeurd.
+
+\subsection{SPA's versus MPA's}
+
+Beide SPA's en MPA's hebben hun eigen voor- en nadelen. De belangrijkste zijn als volgt:
+
+\subsubsection{Resource Usage}
+
+Een eerste overweging is de manier waarop beiden pagina's renderen. In het geval van een SPA gebeurd alle verwerking op de browser-kant, terwijl er in een MPA alleen maar verwerking door de server gebeurd. Dit betekent dat een SPA meer bronnen in beslag neemt op de browser-kant dan een MPA, maar hetzelfde geldt omgekeerd ook voor een MPA. Een SPA zal wel initieel langer laden, omdat de JavaScript-bundel met alle broncode niet alleen groter zal zijn, maar ook nog door de browser geïnterpreteerd moet worden.
+
+\subsubsection{Search Engine Optimization}
+
+Wanneer een pagina geïndexeerd wordt door Google of een andere zoekmachine zal een ``crawler'' alle pagina's overlopen die hij vindt met als doel de juiste metadata te verzamelen om de tonen in de resultaten van een zoekopdracht. In het geval van SPA's is er echter een vervelend probleem. Een SPA bevat niet veel informatie als de achterliggende JavaScript niet aanwezig is, en in de eerste fase van het indexeren gaat er alleen kunnen gekeken worden naar de HTML zonder dat er een kans is om te renderen. Het is pas tijdens de tweede fase dat er ook wel degelijk gerendered kan worden, maar dit is een intensieve taak voor de crawler. Het resultaat kan dan inconsistent zijn. Niet alleen dat, maar sommige zoekmachines ondersteunen het indexeren van gerenderde JavaScript in zijn volledigheid niet. \autocite{cartland_2021}
+
+\subsubsection{Netwerkgebruik}
+
+Omdat een SPA reeds alle componenten opvraagt bij het initiële laden van de applicatie, moet er enkel nog data opgehaald worden in JSON-formaat. Dit is veel minder groot dan de volledige gegenereerde pagina's die een MPA oplevert, en bespaart de gebruiker dus data bij die individuele netwerk-calls.
 
 \section{React}
 
-% TODO: maak een pagina waar alle engelse terminologie wordt uitgelegd.
-% Is deze zin juist?
-Dit onderzoek is voornamelijk in functie van het gebruik van React. React is een library waarmee SPA's gemaakt kunnen worden. Het is ontwikkeld door Facebook in 2013 om het maken van herbruikbare componenten aan te moedigen. Het gebruik van React samen met hun JSX syntax geeft ontwikkelaars een simpele manier om componenten zoals knoppen, hoofdingen etc. aan te maken en overal te gebruiken waar nodig. JSX zorgt voor een makkelijke manier om HTML te mengen met componenten en andere JavaScript code.
+Dit onderzoek valt binnen de context van het ontwikkelen van SPA's met React. React is een SPA library; Ontwikkeld door Facebook in 2013 om het maken van herbruikbare componenten aan te moedigen, geeft het gebruik van React samen met hun JSX syntax ontwikkelaars een simpele manier om componenten zoals knoppen, hoofdingen etc. aan te maken en overal te gebruiken waar nodig. JSX zorgt voor een makkelijke syntax om HTML te mengen met componenten en andere JavaScript code.
 
-\subsection{Opbouw van een create-react-app Applicatie}
+\subsection{Opbouw van een React-applicatie}
 
-``create-react-app'' is een npm-package die bepaalde templates bevat voor een react-applicatie te maken. De die hieronder wordt uitgelegd is die dat ``create-react-app'' aanmaakt, maar dit betekent niet dat dit altijd zo moet zijn. 
+In zijn puurste vorm bestaat een React-applicatie uit 2 bestanden: Een HTML-bestand met een element in zijn body dat als ingang voor React zal dienen, en een JavaScript-bestand dat beschrijft welk element als root zal fungeren voor React.
 
-In essentie zullen 3 relevante bestanden aangemaakt worden wanneer via ``create-react-app'' een app wordt gescaffold\footnote{Het aanmaken van de ondersteunend elementen, in dit geval de basisstructuur van een webapplicatie.}: index.html, index.js en App.js. Index.html bevat de standaard HTML-code voor een website, en één div-element met een (in het geval van create-react-app) id ``root''. Index.js is het ingangspunt van React, en gaat de div met id ``root'' vervangen met de JSX die zich bevindt in App.js.
+Een dergelijk HTML-bestand ziet er zo uit:
+
+\begin{lstlisting}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/favicon.ico" />
+        <title>React-applicatie</title>
+    </head>
+    <body>
+        <div id="app"></div>
+    </body>
+</html>
+\end{lstlisting}
+
+Het bijhorende JavaScript-bestand zou er dan zo uitzien, als de App-component alle verdere logica van de applicatie bevat:
+
+\begin{lstlisting}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+);
+\end{lstlisting}
+
+De \lstinline{ReactDOM.render()}-methode is verantwoordelijk om React te duiden welk element uit het HTML-bestand zal fungeren als het punt waar \lstinline{<App />} gerendered zal worden.
 
 Een belangrijke onderscheiding die hier ook gemaakt moet worden is het verschil tussen een library en framework. React is een library, en biedt enkel de functionaliteit(en) aan die hij bezit. Frameworks breiden hierop uit door daarrond een volledige methodologie op te bouwen. React biedt alle functies aan om een SPA op te bouwen, maar React zal de structuur van een applicatie en de gebruikte werkmethode nooit tegenspreken, of ze nu goed en/of slecht zijn. Bij een framework is dit anders. Meestal is er bij een framework maar 1 methodologie die als correct beschouwd wordt. Afwijken van die methodologie is ofwel sterk afgeraden of simpelweg niet mogelijk. \autocite{roy_2022}
 
-Theoretisch kan nu dus gewerkt worden in App.js om de website op te bouwen. In de realiteit wordt dit niet gedaan, aangezien dat zelfs een simpele website heel snel moeilijk wordt te navigeren door de ontwikkelaar. Wat zal gebeuren is dat de code voor pagina's en componenten tot een zekere mate gesplitst worden. Typisch zal in App.js een router geplaatst worden, die zal zorgen voor de navigatie. Dit simuleert het gevoel van een MPA met verschillende pagina's. Dan zal zich onder elk gedefinieerd pad een component bevinden die code voor de respectievelijke pagina bevat.
+Typisch zal in de App-component een router geplaatst worden, die zal zorgen voor de navigatie. Dit simuleert het gevoel van een MPA met verschillende pagina's. Dan zal zich onder elk gedefinieerd pad een component bevinden die code voor de respectievelijke pagina bevat.
 
-Er zijn dus veel verschillende bestanden aanwezig, elk met een andere bouwsteen van de website. Het is echter inefficiënt of zelfs onmogelijk om deze direct in de browser te laden. Tot circa 2018 had bijna geen enkele browser ondersteuning om meerdere modules tegelijk te laden. En zelfs met die ondersteuning heeft het nog steeds een aantal nadelen, voornamelijk dat het veel minder efficiënt voor een browser is om veel kleine bestanden op te halen, vergeleken met één groot bestand. Voor 2018 was er dus zelfs geen sprake van de modules apart op te halen, dus moest er gebruik worden gemaakt van JavaScript bundlers.
+In de praktijk zal er meestal per component een apart bestand gemaakt worden zodat er een zekere structuur behouden wordt. Het is echter inefficiënt of vaak zelfs onmogelijk om deze direct in de browser te laden. Tot circa 2018 had bijna geen enkele browser ondersteuning om meerdere modules tegelijk te laden. En zelfs met die ondersteuning heeft het nog steeds een aantal nadelen, voornamelijk dat het veel minder efficiënt voor een browser is om veel kleine bestanden op te halen, vergeleken met één groot bestand. Voor 2018 was er dus zelfs geen sprake van de modules apart op te halen, dus moest er de facto gebruik worden gemaakt van JavaScript bundlers. \autocite{deveria_esmodules}
 
 \todo[inline]{TODO: Fix sections}
 \section{Bundlers}
 
-Een JavaScript bundler bundelt de aparte JavaScript bestanden samen, zodat je met één gecombineerd bestand eindigt. Nu is een groot deel van de problemen opgelost, maar nog niet alles.
+Een JavaScript bundler bundelt aparte JavaScript-bestanden samen, zodat je met één gecombineerd bestand eindigt. Een essentiële parameter van een bundler is het startpunt voor de bundel. Dit zal bij een React-applicatie in de meeste gevallen het startpunt zijn van de applicatie, dus het JavaScript-bestand dat de \lstinline{ReactDOM.render()}-methode bevat. Een bundler zal tijdens het bundel-proces alle \lstinline{import}-statements overlopen, en incrementeel ontdekken welke componenten aanwezig zijn en gebruikt worden om vervolgens alle gebruikte fragmenten samen te bundelen. Tijdens het bundelproces kan er nog verdere verwerking gebeuren gebaseerd op hoe het project opgesteld is en gebruikt zal worden. Deze verdere verwerking wordt in het algemeen toegevoegd als extra stap in de configuratie van de bundler, hoewel er wel bundlers zijn die een aantal ingebakken hulpmiddelen voor verdere verwerking bevatten.
 
-\section{Browserondersteuning}
+\subsection{Transpilatie}
 
-De ondersteuning van JavaScript in browsers is beperkt tot wat de ontwikkelaars van de browsers kiezen. Er bestaat een standaard genaamd ECMAScript dat jaarlijks een nieuwe editie heeft. Elke nieuwe editie onvangt een aantal nieuwe features van de JavaScript taal. Browsers implementeren de ondersteuning van JavaScript echter niet volledig volgens ECMAScript edities. Ze werken er meestal naar toe, maar het kan even duren voor een browser een bepaalde ES\footnote{Afkorting van ECMAScript}-versie volledig ondersteund. We kunnen dus niet zomaar op de laatste ES-versie onze Reactapplicaties maken. We moeten eerst onze moderne code transpileren naar een versie die compatibel is met zo goed als alle browsers. Hiervoor worden transpilers gebruikt.
+Transpilatie in de context van JavaScript bundlers omvat 2 verschillende soorten transpilatie: Het transpileren van een recente ES-versie naar een wijder ondersteunde ES-versie en/of het transpileren van TypeScript naar JavaScript.
 
-\section{TypeScript}
+\subsubsection{ECMAScript}
 
-Waar transpilers ook gebruikt voor worden is TypeScript. TypeScript is een superset van JavaScript die statisch getypeerd is... \todo[inline]{TODO: Aanvullen}
+De ondersteuning van JavaScript in browsers is beperkt tot wat de ontwikkelaars van de browsers kiezen. Er bestaat een standaard genaamd ECMAScript, ook afgekort als ES, dat jaarlijks een nieuwe editie heeft met ondersteunde functionaliteiten binnen onder andere JavaScript. Browsers implementeren de ondersteuning van JavaScript echter niet volledig volgens ECMAScript edities. Ze werken er meestal naar toe, maar het kan even duren voor een browser een bepaalde ES-versie volledig ondersteund. We kunnen dus niet zomaar op de laatste ES-versie onze React-applicaties maken. We moeten eerst onze moderne code transpileren naar een versie die compatibel is met zo goed als alle browsers.
 
+\subsubsection{TypeScript}
+
+TypeScript is een superset van JavaScript dat een laag van statische typering toevoegt aan JavaScript. Objecten worden in Typescript een type toegekend. Hierdoor kunnen veel potentiële fouten in verband met datatypes vroeg opgevangen worden en gecorrigeerd worden. Browsers kunnen echter niet TypeScript direct interpreteren, daarvoor is eerst een transpilatiestap naar JavaScript nodig.
+
+\subsection{Verwerking van Andere Bestanden}
+
+In essentie zal een bundler alleen maar letten op JavaScript-bestanden, maar in de praktijk wordt er zo goed als altijd nog wel gebruik gemaakt van andere soorten bestanden. CSS bestanden, afbeeldingen, video's etc. Door het gebruik van zekere plugins (afhankelijk van de bundler) kunnen die ook verwerkt worden. Een mooi voorbeeld hiervan binnen React zijn SVG-bestanden. Binnen Codifly worden SVG-bestanden geïmporteerd als componenten, en het is de bundler die verantwoordelijk is voor de conversie van een .svg bestand naar een equivalent stuk JavaScript code. Het comprimeren van video's en afbeeldingen zijn hierdoor ook mogelijk, alsook het toepassen van CSS modules waar er per component een CSS-bestand aanwezig is.
+
+\subsection{Andere Mogelijkheden}
+
+Naast het interpreteren en transformeren van bestanden, zijn er ook nog heel wat kleine features die bundlers vaak, maar niet per se altijd bevatten:
+
+\begin{itemize}
+    \item Aliassen instellen voor bepaalde paden. Een common folder met standaardcomponenten kan dan bijvoorbeeld de alias @common krijgen.
+    \item Aangepaste configuratie gebaseerd op de omgeving, meestal om te onderscheiden tussen ontwikkelings- en productiebuilds.
+    \item Het configureren van een server die de website lokaal draait tijdens ontwikkeling.
+    \item Het cachen van de bundels.
+    \item Verdere optimalisaties, zoals minification.
+\end{itemize}
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Tot op heden toe wordt binnen Codifly exclusief gebruik gemaakt van Webpack als bundler samen met Babel voor transpilatie. Historisch gezien is dit logisch, er is namelijk ook heel lang geen echte competitie geweest. Webpack was een 5-tal jaar geleden nog de zo goed als de standaardbundler om te gebruiken met React. In de laatste paar jaren is er echter meer en meer competitie bijgekomen. Bundlers zoals Vite en Parcel, die beiden geadverteerd worden als zeer snel en licht op configuratie zijnde, kunnen nu mogelijks een gevaar blijken te zijn voor Webpack zijn plaats op de troon van populairste bundler.
+
+Ook de impact van de gebruikte transpiler is een overweging die gemaakt kan worden. Niet elke bundler is hetzelfde. Sommigen zijn mogelijks heel afhankelijk van een bepaalde transpiler.
+
+%Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
 \label{sec:onderzoeksvraag}
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+De onderzoeker tracht in dit onderzoek te achterhalen wat voor impact een migratie naar een alternatieve bundler zou hebben, hoe het migratieproces en configuratie verloopt en welke potentiële performantie-bonussen mogelijk zijn; om zo hopelijk de conclusie te kunnen bekomen dat de alternatieven klaar zijn voor gebruik binnen de projecten van Codifly en er een alternatief beschikbaar is dat een tegelijkertijd een simpel migratieproces bevat, en significante performantie-voordelen aanbiedt. Daarnaast heeft ook de gebruikte transpiler een impact op performantie, maar is de impact daarvan ook merkbaar bij elke bundler, en interageren transpilers dan ook anders bij andere bundlers?
+
+%Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv. om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Het einddoel van dit onderzoek is om enkele aanbevelingen op te stellen die beschrijven welke bundlers de meest logische keuzes vormen voor gebruik binnen Codifly, gepaard met een proof-of-concept in de vorm van takken op bestaande projecten binnen Codifly waar de bevinden geobserveerd kunnen worden in code.
+
+%Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv. om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
@@ -101,12 +168,12 @@ Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor suc
 % geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
 % die je kan aanvullen/aanpassen in functie van je eigen tekst.
 
-De rest van deze bachelorproef is als volgt opgebouwd:
+De rest van dit onderzoek is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het domein van JavaScript bundlers en TypeScript transpilers, op basis van een literatuurstudie.
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
 % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen het domein van JavaScript bundlers en TypeScript transpilers.
